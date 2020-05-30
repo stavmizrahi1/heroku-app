@@ -1,0 +1,80 @@
+<div class="container wrapper">
+    <div class="row">
+
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="progress" *ngIf="showSpinner">
+                <div class="indeterminate"></div>
+            </div>
+
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">הירשם</h5>
+
+                    <div class="text-center">
+                        <mat-error *ngIf="errorMessage">{{errorMessage}} </mat-error>
+                    </div>
+
+                    <form class="form-signin" [formGroup]="signupForm" novalidate (ngSubmit)="signup()">
+
+                        <div class="form-group">
+                            <label for="groupList">שם תצוגה</label>
+                            <input id="user-name" type="text" class="form-control" placeholder="הקלד.י שם תצוגה"
+                                required autofocus formControlName="username">
+                            <mat-error
+                                *ngIf="signupForm.controls['username'].invalid && signupForm.controls['username'].touched">
+                                שם משתמש זה שדה חובה
+                            </mat-error>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="groupList">כתובת דוא"ל</label>
+                            <input type="email" class="form-control" placeholder="הקלד.י כתובת דוא''ל תקנית'" required
+                                formControlName="email">
+
+                            <mat-error
+                                *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched">
+                                כתובת דוא"ל היא שדה חובה
+                            </mat-error>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="groupList">סיסמה</label>
+                            <input type="password" class="form-control" placeholder="בחר.י סיסמה'" required
+                                formControlName="password">
+                            <mat-error
+                                *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched">
+                                סיסמה היא שדה חובה
+                            </mat-error>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="groupList">קבוצה</label>
+
+                            <select class="form-control" formControlName="nation" required>
+                                <option value="">בחר קבוצה...</option>
+                                <option *ngFor="let nation of nations" [ngValue]="nation">{{nation.name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subGroupList">תת קבוצה</label>
+
+                            <select class="form-control" formControlName="religion" required>
+                                <option *ngFor="let religion of religions" value="{{religion._id}}">{{religion.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <hr class="my-4">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn"
+                            [disabled]="!signupForm.valid">הירשם</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

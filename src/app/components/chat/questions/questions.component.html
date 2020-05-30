@@ -1,0 +1,5 @@
+<mat-chip-list aria-label="Fish selection">
+    <mat-chip *ngFor="let item of questionList" (click)="selectQuestion(item.questionBody)">
+        {{item.questionBody}}
+    </mat-chip>
+</mat-chip-list>

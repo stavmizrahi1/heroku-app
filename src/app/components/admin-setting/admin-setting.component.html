@@ -1,0 +1,268 @@
+<div class="container">
+
+    <mat-tab-group>
+
+        <mat-tab label="ניהול שאלות">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">יצירת שאלה</h2>
+                    <form [formGroup]="questionCreationForm" novalidate (ngSubmit)="createQuestion()">
+                        <div class="form-group">
+                            <label for="subGroupList">בחר קבוצה רלוונטית</label>
+                            <select class="form-control" formControlName="nation" required>
+                                <option value="">בחר קבוצה...</option>
+                                <option *ngFor="let nation of (nationList$ | async)" [ngValue]="nation">{{nation.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subGroupList">בחר תת קבוצה רלוונטית</label>
+                            <select class="form-control" formControlName="religionId" required>
+                                <option *ngFor="let religion of religionList" value="{{religion._id}}">
+                                    {{religion.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>שאלה</label>
+                            <input type="type" class="form-control" placeholder="כתוב שאלה" required autofocus
+                                formControlName="questionBody">
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                            [disabled]="questionCreationForm.invalid">
+                            יצירה
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">רשימה של שאלות</h2>
+                    <div *ngFor="let nation of (nationList$ | async)">
+                        <div *ngFor="let religion of nation.religion">
+                            <div *ngIf="religion.suggestedQuestions.length !== 0" class="nested-table">
+                                <div class="nation">{{nation.name}}</div>
+                                <div class="religion">{{religion.name}}</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" *ngFor="let question of religion.suggestedQuestions">
+                                        <div class="row align-center">
+                                            <div class="col">{{question.questionBody}}</div>
+                                            <div class="col-2 remove">
+                                                <button mat-icon-button (click)="removeQuestion(question._id)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+
+
+        <mat-tab label="ניהול בועיות הסבר">
+
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">יצירת בועית הסבר</h2>
+                    <form [formGroup]="knowledgeItemCreationForm" novalidate (ngSubmit)="createKnowledgeItem()">
+                        <div class="form-group">
+                            <label for="subGroupList">בחר קבוצה רלוונטית</label>
+                            <select class="form-control" formControlName="nation" required>
+                                <option value="">בחר קבוצה...</option>
+                                <option *ngFor="let nation of (nationList$ | async)" [ngValue]="nation">{{nation.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subGroupList">בחר תת קבוצה רלוונטית</label>
+                            <select class="form-control" formControlName="religionId" required>
+                                <option *ngFor="let religion of religionList" value="{{religion._id}}">
+                                    {{religion.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>כותרת</label>
+                            <input type="type" class="form-control" placeholder="כתוב כותרת" required autofocus
+                                formControlName="title">
+                        </div>
+                        <div class="form-group">
+                            <label>הסבר</label>
+                            <textarea type="type" class="form-control" placeholder="כתוב הסבר" required autofocus
+                                formControlName="description"></textarea>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                            [disabled]="knowledgeItemCreationForm.invalid">
+                            יצירה
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">רשימה של בועיות הסבר</h2>
+
+                    <div *ngFor="let nation of (nationList$ | async)">
+                        <div *ngFor="let religion of nation.religion">
+                            <div *ngIf="religion.knowledgeItems.length !== 0" class="nested-table">
+                                <div class="nation">{{nation.name}}</div>
+                                <div class="religion">{{religion.name}}</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" *ngFor="let item of religion.knowledgeItems">
+                                        <div class="row align-center">
+                                            <div class="col">{{item.title}}</div>
+                                            <div class="col"><p>{{item.description}}</p></div>
+                                            <div class="col-2 remove">
+                                                <button mat-icon-button (click)="removeGoodToKnowItem(item._id)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-tab>
+
+
+        <mat-tab label="ניהול קבוצות">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">יצירת קבוצה</h2>
+                    <form [formGroup]="nationCreationForm" novalidate (ngSubmit)="createNation()">
+                        <div class="form-group">
+                            <label>יצירת קבוצה</label>
+                            <input type="type" class="form-control" placeholder="הזן שם קבוצה רצוי" required autofocus
+                                formControlName="name">
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                            [disabled]="nationCreationForm.invalid">
+                            יצירה
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">רשימה של קבוצות קיימות</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col-7">שם</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let nation of (nationList$ | async)">
+                                <td>{{nation._id}}</td>
+                                <td>{{nation.name}}</td>
+                                <td>
+                                    <button mat-icon-button (click)="removeNation(nation._id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="ניהול תתי קבוצות">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">יצירת תת קבוצה</h2>
+
+                    <form [formGroup]="religionCreationForm" novalidate (ngSubmit)="createReligion()">
+                        <div class="form-group">
+                            <label for="subGroupList">בחר קבוצה רלוונטית</label>
+                            <select class="form-control" formControlName="nation" required>
+                                <option value="">בחר קבוצה...</option>
+                                <option *ngFor="let nation of (nationList$ | async)" [ngValue]="nation">{{nation.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>יצירת תת קבוצה</label>
+                            <input type="type" class="form-control" placeholder="הזן שם תת קבוצה רצוי" required
+                                autofocus formControlName="name">
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                            [disabled]="religionCreationForm.invalid">
+                            יצירה
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">רשימה של תתי קבוצות קיימות</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col-2">#</th>
+                                <th scope="col-3">שם</th>
+                                <th scope="col-7">תת קבוצה</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let nation of (nationList$ | async)">
+                                <td>{{nation._id}}</td>
+                                <td>{{nation.name}}</td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let religion of nation.religion">
+                                            <div class="row religion-row">
+                                                <div class="col-3">
+                                                    <span>{{religion.name}}</span>
+                                                </div>
+                                                <div class="col">
+                                                    <button mat-icon-button
+                                                        (click)="removeReligion(nation._id, religion._id)">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="דוח שיחות">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">יצירת דוח</h5>
+                    <iframe
+                        style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);"
+                        width="1000" height="480"
+                        src="https://charts.mongodb.com/charts-miata-mkjdt/embed/charts?id=4015d99a-e660-4a43-9483-13fc27de6413&theme=light"></iframe>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+
+
+</div>

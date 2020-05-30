@@ -1,0 +1,47 @@
+$primary-color:#0E6973;
+
+.religion-row {
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.section-data {
+    color: black;
+}
+
+h1,
+h2,
+h3 {
+    color: black;
+
+}
+
+.align-center {
+    align-items: center;
+}
+
+
+.nested-table {
+    border: 1px solid $primary-color;
+    margin-bottom: 8px;
+
+    .nation {
+        padding: 10px;
+        background-color: $primary-color;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .religion {
+        padding: 10px 15px;
+        background-color: lighten($primary-color, 10%);
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .remove{
+        text-align: end;
+    }
+
+}

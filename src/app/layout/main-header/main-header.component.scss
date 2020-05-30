@@ -1,0 +1,55 @@
+.header-icon {
+  color: #fff;
+}
+.new-message-indication{
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 100%;
+  background-color: white;
+}
+.text-end{
+  text-align: end;
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+
+
+  .user-icon {
+    padding: 0 8px;
+  }
+
+  .user-profile-details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .user-name {
+      font-weight: bold;
+    }
+  }
+}
+
+
+.chat-list-history {
+  width: 250px !important;
+}
+
+.chat-item {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 4px 10px;
+  
+
+  .chat-details {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    justify-content: center;
+
+  }
+}

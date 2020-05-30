@@ -1,0 +1,132 @@
+/* You can add global styles to this file, and also import other style files */
+
+///////COLOR VAR///////////
+$primary-color:#0E6973;
+
+/////////////////////////
+
+
+/*START beautify scroll bar*/
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 3.5px;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 3.5px;
+    background-color: #b8b8b8;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #343a40 !important;
+}
+
+body {
+    margin: 0;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.container {
+    font-family: 'Rubik', sans-serif !important;
+
+    h1,
+    h2,
+    h3 {
+        color: #fff;
+    }
+}
+
+
+.divider {
+    width: 100%;
+    height: 1px;
+    margin: 10px 0;
+    background-color: #ccc;
+}
+
+.btn-primary {
+    background-color: $primary-color;
+    border: none;
+    color: #fff;
+
+    &:hover {
+        background-color: lighten($primary-color, $amount: 10);
+        color: #fff;
+    }
+
+    &:disabled {
+        background-color: lighten($primary-color, $amount: 50);
+
+    }
+
+}
+
+.mat-mini-fab {
+    &.btn-primary {
+        background-color: $primary-color;
+        border: none;
+        color: #fff;
+
+        &:hover {
+            background-color: lighten($primary-color, $amount: 10);
+            color: #fff;
+        }
+    }
+}
+.mat-tooltip{
+    font-size: 14px !important;
+}
+
+.instruction {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 4px;
+}
+
+.title-h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card {
+    margin-bottom: 15px;
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+
+    .card-header {
+        padding: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+.btn-primary-icon {
+    color: $primary-color;
+    border: none;
+
+    &:hover {
+        color: lighten($primary-color, $amount: 10);
+    }
+}
+
+button:focus {
+    outline: none !important;
+}
+
+input:focus {
+    outline: none !important;
+
+}

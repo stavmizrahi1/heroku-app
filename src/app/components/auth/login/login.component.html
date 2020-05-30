@@ -1,0 +1,50 @@
+
+<div class="container wrapper">
+    <div class="row">
+
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="progress" *ngIf="showSpinner">
+                <div class="indeterminate"></div>
+            </div>
+
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">התחברות</h5>
+
+                    <div class="text-center">
+                        <mat-error *ngIf="errorMessage">{{errorMessage}} </mat-error>
+                    </div>
+
+                    <form class="form-signin" [formGroup]="loginForm" novalidate (ngSubmit)="loginUser()">
+                        <div class="form-label-group">
+                            <label for="inputEmail">שם משתמש</label>
+
+                            <input id="user-name" type="type" class="form-control" placeholder="הקלד.י שם משתמש"
+                                required autofocus formControlName="username">
+                            <mat-error
+                                *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
+                                שם משתמש זה שדה חובה</mat-error>
+                        </div>
+
+                        <div class="form-label-group">
+                            <label for="inputPassword">סיסמה</label>
+
+                            <input id="password" type="password" class="form-control" placeholder="הקלד.י סיסמה"
+                                required formControlName="password">
+                            <mat-error
+                                *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                                שם משתמש זה שדה חובה</mat-error>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="loginbtn"
+                            [disabled]="loginForm.invalid">כניסה</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

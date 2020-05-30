@@ -1,0 +1,65 @@
+<div class="card card-chat">
+    <div class="card-header">
+        <div class="chat-title-wrapper">
+            <span class="instruction">הנך משוחח.ת עם: </span>
+            <br>
+            <span *ngIf="receiverData">
+                <b>{{partnerData.username}}</b>
+                - {{partnerData.nation.name}} | {{partnerData.religion.name}}
+            </span>
+        </div>
+    </div>
+    <div class="card-body chat-color">
+        <div class="conversation-wrapper " #scrollMe style="height: xyz;">
+
+            <ng-container *ngFor="let message of messagesArray">
+                <ng-container *ngIf="user._id == message !== receiverData._id && user._id !== message.senderId">
+                    <div class="row message-wrapper">
+                        <div class="col-12">
+                            <div class="chat-bubble incoming-msg float-right">
+                                <div class="message">{{message.body}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="user._id === message.senderId">
+                    <div class="row message-wrapper">
+                        <div class="col-12">
+                            <div class="chat-bubble sent-msg float-left">
+                                <div class="message">{{message.body}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="cf"></div>
+            </ng-container>
+
+
+            <div class="received" *ngIf="typing">
+                <div class="chat-bubble received slide-left">
+                    <div class="message">
+                        {{receiver}} is typing...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <form (ngSubmit)="SendMessage()">
+                    <div class="type_msg">
+                        <div class="input_msg_write">
+                            <input type="text" class="write_msg" placeholder="הקלד.י הודעה..." name="message"
+                                [(ngModel)]="message" (keypress)="IsTyping()" autocomplete="off" />
+                            <button class="btn-primary msg_send_btn" (click) = "myFunction()" mat-mini-fab>
+                                <mat-icon>send</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>

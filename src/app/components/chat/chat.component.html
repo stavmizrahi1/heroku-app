@@ -1,0 +1,34 @@
+<div class="container-fluid" style="margin-top: 30px" *ngIf="partnerData">
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-9 mx-auto">
+      <app-chat-message [partnerData]="partnerData"></app-chat-message>
+    </div>
+
+    <div class="col-12 col-md-12 col-lg-3 mx-auto">
+      <div class="card" style="height: 100%;">
+        <div class="card-header">
+          <span class="instruction">אם אין לך מה לשאול... </span>
+          <br>
+          <span>הצעות לשאלות:</span>
+        </div>
+        <div class="card-body">
+          <app-questions [questionList]="partnerData.religion.suggestedQuestions"></app-questions>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 30px">
+    <div class="col-12 mx-auto">
+      <div class="card" style="height: 100%;">
+        <div class="card-header">
+          <span class="instruction">לשירותך מידע נוסף אודות:</span>
+          <br>
+        </div>
+        <div class="card-body">
+          <app-good-to-know [goodToKnowList]="partnerData.religion.knowledgeItems"></app-good-to-know>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
